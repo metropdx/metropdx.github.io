@@ -1,0 +1,443 @@
+---
+layout: default
+---
+
+<!-- Start Notice -->
+
+{% assign heroClass = 'hero' %}
+{% if site.data.notice.active %}
+    {% assign heroClass = 'hero hero-with-notice' %}
+    <div class="notice">
+        <h3>{{ site.data.notice.title}}</h3>
+        <p>{{ site.data.notice.body }}</p>
+    </div>
+{% endif %}
+
+<!-- End Notice -->
+
+<!-- Start Hero -->
+<div class="{{heroClass}}" style="background: url('{{ site.baseurl }}/img/{{ site.hero.hero_bg }}') repeat-x;">
+    <div class="hero-content" style="background: url('{{ site.baseurl }}/img/{{ site.hero.hero_img }}') no-repeat top right;">
+        <a class="logo" href="{{ site.baaseurl }}">
+          <img src="/img/logo.jpg" width="275" height="200" alt="Metro PDX Soccer">
+        </a>
+    </div>
+</div>
+<!-- End Hero -->
+
+<!-- Start 3 columns -->
+<div class="three-shade-col">
+    <div class="col-sm-4">
+        <a class="scroll" href="#season">
+            <svg class="icon icon-clock-o"><use xlink:href="#icon-clock-o"></use></svg>
+            <h3>Registration</h3>
+            <ul>
+                <li><strong>Deadline:</strong> {{ site.data.season.deadline }}</li>
+            </ul>
+        </a>
+    </div>
+    <div class="col-sm-4">
+        <a class="scroll" href="#schedules">
+            <svg class="icon icon-calendar"><use xlink:href="#icon-calendar"></use></svg>
+            <h3>Schedules</h3>
+            <ul>
+                <li>{{ site.data.season.start }} - {{ site.data.season.end }}</li>
+            </ul>
+        </a>
+    </div>
+    <div class="col-sm-4">
+        <a class="scroll" href="#contact">
+            <svg class="icon icon-envelope-o"><use xlink:href="#icon-envelope-o"></use></svg>
+            <h3>Stay Informed</h3>
+            <ul>
+                <li>Subscribe to our newsletter</li>
+            </ul>
+        </a>
+    </div>
+</div>
+<!-- End 3 columns -->
+
+<!-- Start About -->
+<div id="about" class="about">
+    <div class="container-fluid">
+        <h2 class="section-title">About the 7v7 League</h2>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Welcome to Metro PDX Soccer</h3>
+                <p>
+                    We are a nimble league offering the best service to teams and players! We offer flexibility with each division self-governing within the framework of the overall league. If there are any desirable features, we have the ability to customize to your needs.
+                </p>
+
+                <div class="media">
+                    <div class="media-left">
+                        <div class="boxed-icon">
+                            <svg class="icon icon-heart"><use xlink:href="#icon-heart"></use></svg>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <p>We love our teams and players and do whatever we can to provide a rewarding experience</p>
+                    </div>
+                </div>
+
+                <div class="media">
+                    <div class="media-left">
+                        <div class="boxed-icon">
+                            <svg class="icon icon-star"><use xlink:href="#icon-star"></use></svg>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <p>We provide the best value and customer service with the lowest price in the region</p>
+                    </div>
+                </div>
+
+                <div class="media">
+                    <div class="media-left">
+                        <div class="boxed-icon">
+                            <svg class="icon icon-diamond"><use xlink:href="#icon-diamond"></use></svg>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <p>For your convenience, all games will be played at consistent times each week at the same location</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="tilt pic">
+                <img src="img/about.jpg" alt="...">
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End About -->
+
+<!-- Start Contact -->
+<div id="contact" class="contact">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                <img src="/img/eric.png"/>
+            </div>
+            <div class="col-sm-6">
+                <h3><svg class="icon icon-phone"><use xlink:href="#icon-phone"></use></svg>Contact Eric</h3>
+                <p>Please contact Eric Beck, the leauge administrator, with any questions. He is available by phone between the hours of 8AM and 4PM at 503-662-8182. Payments may be mailed to 2169 SE Scott Avenue, Gresham OR 97080</p>
+            </div>
+            <div class="col-sm-4">
+                <h3><svg class="icon icon-envelope"><use xlink:href="#icon-envelope"></use></svg>Subsribe to Newsletter</h3>
+                <p>Join our mailing list to stay informed of schedule changes, game cancelations, and other important league information.</p>
+                <!-- Begin MailChimp Signup Form -->
+                <link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+                <div id="mc_embed_signup">
+                <form action="//metro7v7.us4.list-manage.com/subscribe/post?u=3d979ef95cc2df03167ef5454&amp;id=16cacff209" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                    <div id="mc_embed_signup_scroll">
+
+                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3d979ef95cc2df03167ef5454_16cacff209" tabindex="-1" value=""></div>
+                    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+                    </div>
+                </form>
+                </div>
+                <!--End mc_embed_signup-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Contact -->
+
+<!-- Start Testimonials -->
+<div id="testimonials" class="testimonials parallax" style="background-image: url('{{ site.baseurl }}/img/{{ site.testimonials.testimonials_img }}');">
+    <div class="overlay-container">
+        <div class="overlay"></div>
+        <div class="container-fluid">
+            <div id="testimonial-carousel">
+                {% for testimonial in site.data.testimonials %}
+                    <div class="testimonial-item">
+                        <svg class="icon icon-quote-left"><use xlink:href="#icon-quote-left"></use></svg>
+                        <blockquote>
+                            <p>{{ testimonial.description }}</p>
+                            <footer>
+                                {{ testimonial.name }}
+                                <small>{{ testimonial.title }}</small>
+                            </footer>
+                        </blockquote>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Testimonials -->
+
+<!-- <div>
+  <p style="font-size:30px" id="loading">
+    Please wait ...
+  </p>
+  <div id="dropin-container"></div>
+  <form id="checkout-form" autocomplete="off">
+    <input id="textAmount" name="amount" type="tel" min="1" placeholder="Amount" value="10"/>
+    <input type='text' placeholder='Name' id="textName"/>
+    <input type='text' placeholder='Email' id="textEmail"/>
+    <input type="submit" value="Pay $10" id="btnPay">
+  </form>
+</div> -->
+
+<!-- Start Registration -->
+<div id="season" class="treatments">
+    <div class="container-fluid">
+        <h2 class="section-title">{{ site.data.season.name }}</h2>
+
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="icon-box">
+                    <svg class="icon icon-calendar"><use xlink:href="#icon-calendar"></use></svg>
+                    <h4>Registration Deadline</h4>
+                    <p>
+                        {{ site.data.season.deadline }}<br/>
+                        Early registration guarantees your spot!
+                        <a class="popup-with-iframe" href="https://docs.google.com/forms/d/1cutOphONmQi4W3iWMbv9VA1QTlpI-UhXeiCxK6b1d_U/viewform?embedded=true">Register Team</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="icon-box">
+                    <svg class="icon icon-group"><use xlink:href="#icon-group"></use></svg>
+                    <h4>Team Fee</h4>
+                    <p>
+                        <strong>${{ site.data.season.fee }}</strong><br/>
+                        Each team of 7 players plays {{ site.data.season.numberGames }} games<br/>
+                        <a class="popup-with-form" href="#payment">Make Payment</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="icon-box">
+                    <svg class="icon icon-clock-o"><use xlink:href="#icon-clock-o"></use></svg>
+                    <h4>Game Times</h4>
+                    <p>
+                        {{ site.data.season.days }} {{ site.data.season.times }}<br/>
+                        {{ site.data.season.start }} - {{ site.data.season.end }}<br/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="icon-box">
+                    <svg class="icon icon-map-marker"><use xlink:href="#icon-map-marker"></use></svg>
+                    <h4>Location</h4>
+                    <p>
+                        {{ site.data.season.location.name }}<br/>
+                        {{ site.data.season.location.street }}, {{ site.data.season.location.city }} {{ site.data.season.location.state }} {{ site.data.season.location.zip }}<br/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="icon-box">
+                    <svg class="icon icon-bolt"><use xlink:href="#icon-bolt"></use></svg>
+                    <h4>Requirements</h4>
+                    <p>
+                    Valid <a href="http://oregonadultsoccer.com/player_registration.htm">OASA player cards</a> required<br/>
+                    Bring <a href="http://oregonadultsoccer.com/PDF%20others/Forms/Match%20Roster%20Form.pdf">Team Roster</a> to each game<br/>
+                    Read the <a href="/rules">Rules of Competition</a></p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="icon-box">
+                    <svg class="icon icon-trophy"><use xlink:href="#icon-trophy"></use></svg>
+                    <h4>Trophies</h4>
+                    <p>
+                        1st and 2nd place trophies per division
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="icon-box icon-box-featured">
+                <a class="popup-with-iframe" href="https://docs.google.com/forms/d/1cutOphONmQi4W3iWMbv9VA1QTlpI-UhXeiCxK6b1d_U/viewform?embedded=true">
+                  <h3><svg class="icon icon-dark icon-pencil"><use xlink:href="#icon-pencil"></use></svg> Register Your Team</h3>
+                  <p>Complete the online team registration form</p>
+                </a>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="icon-box icon-box-featured">
+                <a class="popup-with-form" href="#payment">
+                  <h3><svg class="icon icon-dark icon-credit-card"><use xlink:href="#icon-credit-card"></use></svg> Make Team Payment</h3>
+                  <p>Pay for your team</p>
+                </a>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Registration -->
+
+<!-- Start Schedules -->
+<div id="schedules" class="schedules"></div>
+    <h2 class="section-title">Schedules</h2>
+    <div id="schedule-widget" class="sz-widget"></div>
+    <script type="text/javascript" src="//sportzing.com/web/dist/sz-0.1.9.min.js"></script><script type="text/javascript">
+      SZ.start({widget:'schedules', selector:'#schedule-widget', token: 'metro1'});
+    </script>
+</div>
+<!-- End Schedules -->
+
+<!-- Start Map -->
+<div id="location"></div>
+    <h2 class="section-title">Location</h2>
+    <div class="map" data-zoom="{{ site.map.zoom }}" data-address="{{ site.data.season.location.street }} {{ site.data.season.location.city }} {{ site.data.season.location.state }} {{ site.data.season.location.zip }}" data-address-details="{{ site.data.season.location.name }}"></div>
+</div>
+<!-- End Map -->
+
+<!-- Start payment form -->
+<div id="payment" class="mfp-hide white-popup-block">
+
+  <form id="payment-form" autocomplete="on">
+
+    <div id="panel1">
+      <legend>Make Payment</legend>
+
+      <label>Purpose of Payment</label>
+
+      <div class="radio">
+        <label>
+          <input type="radio" name="purposeRadios" value="full" data-amount="{{ site.data.season.fee }}" checked>
+          Pay full ${{ site.data.season.fee }} team fee
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="purposeRadios" value="deposit" data-amount="{{ site.data.season.deposit }}">
+          Pay ${{ site.data.season.deposit }} team deposit
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="purposeRadios" value="partial" data-amount="">
+          Pay partial amount toward team fee
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="purposeRadios" value="other" data-amount="">
+          Pay for something else
+        </label>
+      </div>
+      <div id="form-inputs">
+
+        <label id="lblPayor" for="frmPayor">Your Name</label>
+        <input type="text" id="frmPayor" required placeholder="Your Name">
+
+        <label id="lblTeam" for="frmTeam">Team Name</label>
+        <input type="text" id="frmTeam" required placeholder="Team Name">
+
+        <label id="lblReason" for="frmReason">Reason for payment</label>
+        <input type="text" id="frmReason" required placeholder="Reason for payment">
+
+        <label id="lblFee" for="frmFee">Amount to Pay</label>
+        <input type="text" id="frmFee" required placeholder="Amount to Pay" type="number" min="1" value="{{ site.data.season.fee }}" />
+
+        <label for="frmEmail">Email Address</label>
+        <input type="email" id="frmEmail" required maxlength="40" placeholder="Email" type="email" autocomplete="email"/>
+
+        <label for="frmPhone">Phone Number</label>
+        <input type="text" id="frmPhone" required maxlength="40" placeholder="Phone" type="tel" autocomplete="phone"/>
+
+        <button id="btnNext" class="btn btn-default" type="button">Next</button>
+
+      </div>
+
+
+    </div>
+
+    <div id="panel2">
+      <legend>Make Payment</legend>
+      <p>Do <strong>NOT</strong> provide real credit card information in this field.</p>
+      <div class="card-wrapper"></div>
+
+      <!-- <form id="payment-form" autocomplete="on"> -->
+      <div id="form-inputs">
+
+        <label for="frmCCName">Name on card</label>
+        <input type="text" id="frmCCName" required placeholder="Cardholder Name" autocomplete="cc-name" data-braintree-name="cardholder_name"/>
+
+        <label for="frmCCNum">Card Number</label>
+        <input type="text" id="frmCCNum" required placeholder="Card Number" type="number" autocomplete="cc-number" data-braintree-name="number"/>
+
+        <label for="frmCCExp">Expiration Date</label>
+        <input type="text" id="frmCCExp" required placeholder="MM / YY" type="month" autocomplete="cc-exp" data-braintree-name="expiration_date"/>
+
+        <label for="frmCCCVC">CVC</label>
+        <input type="text" id="frmCCCVC" required placeholder="CVC" type="number" autocomplete="cc-csc" data-braintree-name="cvv"/>
+
+        <label for="frmCCZip">Zipcode</label>
+        <input type="text" id="frmCCZip" required pattern="[0-9]*" maxlength="5" placeholder="Postal code" autocomplete="postal-code" data-braintree-name="postal_code"/>
+
+        <button id="btnPay" class="btn btn-default" type="submit">Send Payment</button>
+      </div>
+      <!-- </form> -->
+    </div>
+
+  </form>
+
+<!--
+  <form id="checkout-form" autocomplete="off">
+
+  <div class="input-group" id="teamWrapper">
+    <span class="input-group-addon" id="name-addon"><svg class="icon icon-group"><use xlink:href="#icon-group"></use></svg></span>
+    <input id="team" type="text" class="form-control" placeholder="Team Name" aria-describedby="team-addon">
+  </div>
+  <div class="input-group" id="reasonWrapper">
+    <span class="input-group-addon" id="purpose-addon"><svg class="icon icon-quotes-left"><use xlink:href="#icon-quotes-left"></use></svg></span>
+    <input id="reason" type="text" class="form-control" placeholder="Reason for payment" aria-describedby="reason-addon" value="">
+  </div>
+  <div class="input-group" id="amountWrapper">
+    <span class="input-group-addon" id="amount-addon"><svg class="icon icon-coin-dollar"><use xlink:href="#icon-coin-dollar"></use></svg></span>
+    <input id="amount" type="text" class="form-control" placeholder="Amount to Pay" aria-describedby="amount-addon" value="{{ site.data.season.fee }}" type="tel" min="1">
+  </div>
+
+
+    <div class="input-group">
+      <span class="input-group-addon" id="name-addon"><svg class="icon icon-user"><use xlink:href="#icon-user"></use></svg></span>
+      <input id="name" type="text" class="form-control" placeholder="Full Name" aria-describedby="email-addon">
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon" id="email-addon">@</span>
+      <input id="email" type="text" class="form-control" placeholder="Email Address" aria-describedby="email-addon">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon" id="phone-addon"><svg class="icon icon-phone"><use xlink:href="#icon-phone"></use></svg></span>
+      <input id="phone" type="text" class="form-control" placeholder="Phone Number" aria-describedby="phone-addon">
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon" id="creditcard-addon"><svg class="icon icon-credit-card"><use xlink:href="#icon-credit-card"></use></svg></span>
+      <input id="creditcard" type="text" class="form-control" placeholder="Credit Card Number" aria-describedby="creditcard-addon" data-braintree-name="number">
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon" id="expiration-addon"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"></use></svg></span>
+      <input id="expiration" type="text" class="form-control" placeholder="Expiration Date" aria-describedby="expiration-addon" data-braintree-name="expiration_date">
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon"><svg class="icon icon-coin-dollar"><use xlink:href="#icon-coin-dollar"></use></svg></span>
+      <input id="amount" type="text" class="form-control" aria-label="Amount to Pay" value="455" type="tel" min="1">
+      <span class="input-group-addon">.00</span>
+    </div>
+
+
+    <div class="input-group">
+      <span class="input-group-addon" id="name-addon"><svg class="icon icon-group"><use xlink:href="#icon-group"></use></svg></span>
+      <input id="team" type="text" class="form-control" placeholder="Team Name" aria-describedby="team-addon">
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon" id="purpose-addon"><svg class="icon icon-quotes-left"><use xlink:href="#icon-quotes-left"></use></svg></span>
+      <input id="purpose" type="text" class="form-control" placeholder="Purpose" aria-describedby="purpose-addon" value="For team payment">
+    </div>
+
+    <input type="submit" value="Submit Payment" id="btnPay">
+  </form> -->
+</div>
+<!-- End payment form -->
