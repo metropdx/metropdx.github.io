@@ -21,3 +21,16 @@
     }
 
 }
+
+.pic {
+  margin-left: 5rem;
+  padding: 8px;
+  border: 2px solid black;
+}
+.tilt {
+  -webkit-transform: rotate(-2deg);
+     -moz-transform: rotate(-2deg);
+       -o-transform: rotate(-2deg);
+      -ms-transform: rotate(-2deg);
+          transform: rotate(-2deg);
+}
