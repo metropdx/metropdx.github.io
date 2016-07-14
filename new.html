@@ -322,8 +322,8 @@ layout: default
           Pay for something else
         </label>
       </div>
-      <div id="form-inputs">
 
+      <div id="form-inputs">
         <label id="lblPayor" for="frmPayor">Your Name</label>
         <input type="text" id="frmPayor" required placeholder="Your Name">
 
@@ -343,101 +343,81 @@ layout: default
         <input type="text" id="frmPhone" required maxlength="40" placeholder="Phone" type="tel" autocomplete="phone"/>
 
         <button id="btnNext" class="btn btn-default" type="button">Next</button>
-
       </div>
-
-
     </div>
 
     <div id="panel2">
       <legend>Make Payment</legend>
-      <p>Do <strong>NOT</strong> provide real credit card information in this field.</p>
-      <div class="card-wrapper"></div>
 
-      <!-- <form id="payment-form" autocomplete="on"> -->
-      <div id="form-inputs">
+      <!-- <div class="card-wrapper"></div> -->
 
+      <!-- <div id="form-inputs">
         <label for="frmCCName">Name on card</label>
         <input type="text" id="frmCCName" required placeholder="Cardholder Name" autocomplete="cc-name" data-braintree-name="cardholder_name"/>
 
-        <label for="frmCCNum">Card Number</label>
-        <input type="text" id="frmCCNum" required placeholder="Card Number" type="number" autocomplete="cc-number" data-braintree-name="number"/>
+        <label for="frmCCNum" class="hosted-fields--label">Card Number</label>
+        <div id="frmCCNum" class="hosted-field"></div>
 
-        <label for="frmCCExp">Expiration Date</label>
-        <input type="text" id="frmCCExp" required placeholder="MM / YY" type="month" autocomplete="cc-exp" data-braintree-name="expiration_date"/>
+        <label for="frmCCExp" class="hosted-fields--label">Expiration Date</label>
+        <div id="frmCCExp" class="hosted-field"></div>
 
-        <label for="frmCCCVC">CVC</label>
-        <input type="text" id="frmCCCVC" required placeholder="CVC" type="number" autocomplete="cc-csc" data-braintree-name="cvv"/>
+        <label for="frmCCCVC" class="hosted-fields--label">CVC</label>
+        <div id="frmCCCVC" class="hosted-field"></div>
 
-        <label for="frmCCZip">Zipcode</label>
-        <input type="text" id="frmCCZip" required pattern="[0-9]*" maxlength="5" placeholder="Postal code" autocomplete="postal-code" data-braintree-name="postal_code"/>
+        <label for="frmCCZip" class="hosted-fields--label">Zipcode</label>
+        <div id="frmCCZip" class="hosted-field"></div>
 
         <button id="btnPay" class="btn btn-default" type="submit">Send Payment</button>
+      </div> -->
+      <!-- <input type="tel" id="frmCCNum" required placeholder="Card Number" autocomplete="cc-number" data-braintree-name="number"/> -->
+      <!-- <input type="tel" id="frmCCExp" required placeholder="MM / YY" autocomplete="cc-exp" data-braintree-name="expiration_date"/> -->
+      <!-- <input type="tel" id="frmCCCVC" required placeholder="CVC" autocomplete="cc-csc" data-braintree-name="cvv"/> -->
+      <!-- <input type="tel" id="frmCCZip" required pattern="[0-9]*" maxlength="5" placeholder="Postal code" autocomplete="postal-code" data-braintree-name="postal_code"/> -->
+
+      <!-- Bootstrap inspired Braintree Hosted Fields example -->
+      <div class="panel panel-default bootstrap-basic">
+        <div class="panel-heading">
+          <h3 class="panel-title">Enter Card Details</h3>
+        </div>
+        <div class="row">
+          <div class="form-group col-xs-8">
+            <label class="control-label">Card Number</label>
+            <!--  Hosted Fields div container -->
+            <div class="form-control" id="card-number"></div>
+            <span class="helper-text"></span>
+          </div>
+          <div class="form-group col-xs-4">
+            <div class="row">
+              <label class="control-label col-xs-12">Expiration Date</label>
+              <div class="col-xs-6">
+                <!--  Hosted Fields div container -->
+                <div class="form-control" id="expiration-month"></div>
+              </div>
+              <div class="col-xs-6">
+                <!--  Hosted Fields div container -->
+                <div class="form-control" id="expiration-year"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-xs-6">
+            <label class="control-label">Security Code</label>
+            <!--  Hosted Fields div container -->
+            <div class="form-control" id="cvv"></div>
+          </div>
+          <div class="form-group col-xs-6">
+            <label class="control-label">Zipcode</label>
+            <!--  Hosted Fields div container -->
+            <div class="form-control" id="postal-code"></div>
+          </div>
+        </div>
+        <button value="submit" id="submit" class="btn btn-success btn-lg center-block">Pay with <span id="card-type">Card</span></button>
       </div>
-      <!-- </form> -->
+    
     </div>
 
   </form>
 
-<!--
-  <form id="checkout-form" autocomplete="off">
-
-  <div class="input-group" id="teamWrapper">
-    <span class="input-group-addon" id="name-addon"><svg class="icon icon-group"><use xlink:href="#icon-group"></use></svg></span>
-    <input id="team" type="text" class="form-control" placeholder="Team Name" aria-describedby="team-addon">
-  </div>
-  <div class="input-group" id="reasonWrapper">
-    <span class="input-group-addon" id="purpose-addon"><svg class="icon icon-quotes-left"><use xlink:href="#icon-quotes-left"></use></svg></span>
-    <input id="reason" type="text" class="form-control" placeholder="Reason for payment" aria-describedby="reason-addon" value="">
-  </div>
-  <div class="input-group" id="amountWrapper">
-    <span class="input-group-addon" id="amount-addon"><svg class="icon icon-coin-dollar"><use xlink:href="#icon-coin-dollar"></use></svg></span>
-    <input id="amount" type="text" class="form-control" placeholder="Amount to Pay" aria-describedby="amount-addon" value="{{ site.data.season.fee }}" type="tel" min="1">
-  </div>
-
-
-    <div class="input-group">
-      <span class="input-group-addon" id="name-addon"><svg class="icon icon-user"><use xlink:href="#icon-user"></use></svg></span>
-      <input id="name" type="text" class="form-control" placeholder="Full Name" aria-describedby="email-addon">
-    </div>
-
-    <div class="input-group">
-      <span class="input-group-addon" id="email-addon">@</span>
-      <input id="email" type="text" class="form-control" placeholder="Email Address" aria-describedby="email-addon">
-    </div>
-    <div class="input-group">
-      <span class="input-group-addon" id="phone-addon"><svg class="icon icon-phone"><use xlink:href="#icon-phone"></use></svg></span>
-      <input id="phone" type="text" class="form-control" placeholder="Phone Number" aria-describedby="phone-addon">
-    </div>
-
-    <div class="input-group">
-      <span class="input-group-addon" id="creditcard-addon"><svg class="icon icon-credit-card"><use xlink:href="#icon-credit-card"></use></svg></span>
-      <input id="creditcard" type="text" class="form-control" placeholder="Credit Card Number" aria-describedby="creditcard-addon" data-braintree-name="number">
-    </div>
-
-    <div class="input-group">
-      <span class="input-group-addon" id="expiration-addon"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"></use></svg></span>
-      <input id="expiration" type="text" class="form-control" placeholder="Expiration Date" aria-describedby="expiration-addon" data-braintree-name="expiration_date">
-    </div>
-
-    <div class="input-group">
-      <span class="input-group-addon"><svg class="icon icon-coin-dollar"><use xlink:href="#icon-coin-dollar"></use></svg></span>
-      <input id="amount" type="text" class="form-control" aria-label="Amount to Pay" value="455" type="tel" min="1">
-      <span class="input-group-addon">.00</span>
-    </div>
-
-
-    <div class="input-group">
-      <span class="input-group-addon" id="name-addon"><svg class="icon icon-group"><use xlink:href="#icon-group"></use></svg></span>
-      <input id="team" type="text" class="form-control" placeholder="Team Name" aria-describedby="team-addon">
-    </div>
-
-    <div class="input-group">
-      <span class="input-group-addon" id="purpose-addon"><svg class="icon icon-quotes-left"><use xlink:href="#icon-quotes-left"></use></svg></span>
-      <input id="purpose" type="text" class="form-control" placeholder="Purpose" aria-describedby="purpose-addon" value="For team payment">
-    </div>
-
-    <input type="submit" value="Submit Payment" id="btnPay">
-  </form> -->
 </div>
 <!-- End payment form -->
