@@ -8608,11 +8608,22 @@ $.fn.gmap3 = function () {
       onPaymentMethodReceived: function (obj) {
         console.log('payment received', obj)
         // Send payment nonce with additional transaction data
+        var data = getFormData()
+        console.log('formData', data)
         $.ajax({
           url: 'https://tl4hta2txd.execute-api.us-west-2.amazonaws.com/dev/checkout',
           type: 'POST',
           contentType: 'application/json; charset=UTF-8',
-          data: $.extend(getFormData(), { nonce: obj.nonce }),
+          data: {
+            nonce: obj.nonce,
+            purpose: data.purpose,
+            payor: data.payor,
+            team: data.team,
+            reason: data.reason,
+            amount: data.amount,
+            email: data.email,
+            phone: data.phone
+          },
           crossDomain: true
         }).done(function (result) {
           console.log('sent checkout', result)
