@@ -159,7 +159,7 @@
 
   function getFormData () {
     return {
-      purpose: $('input[type=radio][name=purposeRadios]').val(),
+      purpose: $('input[type=radio][name=purposeRadios]:checked').val(),
       payor: $('#frmPayor').val().trim(),
       team: $('#frmTeam').val().trim(),
       reason: $('#frmReason').val().trim(),
