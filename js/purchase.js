@@ -419,15 +419,25 @@
 
             console.log('payment method received', obj)
 
+            // amount: transaction.amount,
+            // createdAt: transaction.createdAt,
+            // id: transaction.id,
+            // descriptor: transaction.descriptor.name,
+            // cardType: transaction.creditCard.cardType,
+            // maskedNumber: transaction.creditCard.maskedNumber,
+            // errors: []
+
             // Get data from form
             var data = $.extend(getFormData(), { nonce: obj.nonce })
-            console.log('sending data', data)
+            // console.log('sending data', data)
             // Send payment nonce with additional form data
             sendPaymentForm(data, function (result) {
-              console.log('sent payment form', result)
-              if (result.status !== 200) {
-                console.log('not 200')
-              }
+              // console.log('sent payment form', result)
+              $('#feeDisplay').html('$' + result.amount)
+              $('#cardTypeDisplay').html(result.cardType)
+              $('#last4Display').html(result.last4)
+              $('#descriptorDisplay').html(result.descriptor)
+              $('#transactionIdDisplay').html(result.id)
               showPanel('#panel4')
             }, function (err) {
               // Activate submit button

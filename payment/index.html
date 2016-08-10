@@ -122,7 +122,26 @@ layout: payment
     </div>
 
     <div class="form-inputs">
-      <p>Your payment of <strong id="feeDisplay"></strong> has been sent.</p>
+      <p>
+        Your payment has been successfully charged to your
+        <strong id="cardTypeDisplay"></strong> ending in
+        <strong id="last4Display"></strong>.
+        Your transaction id is:
+      </p>
+      <div id="transactionIdDisplay"></div>
+
+      <p>
+        The following transaction details will appear on your next statement:
+      </p>
+
+      <div class="row">
+        <div class="col-xs-8">
+          <strong id="descriptorDisplay"></strong>
+        </div>
+        <div class="col-xs-4">
+          <strong id="feeDisplay"></strong>
+        </div>
+      </div>
 
       <button id="btnDone" class="btn" type="button" data-href="/">Done</button>
     </div>
