@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: payment
 ---
 
 <!-- Start payment form -->
@@ -27,7 +27,7 @@ layout: page
       <button id="btnOther" class="btn btn-default" type="button" data-panel="#panel2" data-amount="">Payment for something else</button>
 
       <input type="hidden" id="frmPurpose"/>
-      <input type="text" id="frmMerchant" value="7v7"/>
+      <input type="hidden" id="frmMerchant" value="7v7"/>
     </div>
   </div>
 
@@ -125,14 +125,12 @@ layout: page
       <p>Your payment of <strong id="feeDisplay"></strong> has been sent.</p>
 
       <button id="btnDone" class="btn" type="button" data-href="/">Done</button>
-
     </div>
-
   </div>
 
   <div class="panel panel-default bootstrap-basic hidden" id="panelError">
     <div class="panel-heading">
-      <h3 class="panel-title">Payment Failure</h3>
+      <h3 class="panel-title">Payment Error</h3>
     </div>
 
     <div class="form-inputs">
@@ -147,9 +145,17 @@ layout: page
           <button id="btnRetry" class="btn btn-default" type="button" data-panel="#panel1" data-amount="">Update and Retry</button>
         </div>
       </div>
+    </div>
+  </div>
 
+  <div class="panel panel-default bootstrap-basic hidden" id="panelFail">
+    <div class="panel-heading">
+      <h3 class="panel-title">System Failure</h3>
     </div>
 
+    <div class="form-inputs">
+      <p>The payment system is unavailable at this time. Please try again later.</p>
+    </div>
   </div>
 
 </form>

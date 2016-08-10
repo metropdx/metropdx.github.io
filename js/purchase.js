@@ -101,10 +101,15 @@
     showPanel('#panelError')
   };
 
+  function handleFail () {
+    showPanel('#panelFail')
+  };
+
   function setupBraintreeClientV3 (clientToken) {
     console.log('setting up client', clientToken)
     if (!clientToken.token) {
-      return handleError(new Error('Error connecting to payment provider'))
+      console.error('Error connecting to payment provider', clientToken)
+      return handleFail()
     }
     braintree.client.create({
       authorization: clientToken.token
@@ -114,7 +119,8 @@
 
   function setupHostedFieldsV3 (err, clientInstance) {
     if (err) {
-      return handleError(err)
+      console.error('Error creating payment client', err)
+      return handleFail()
     }
     braintree.hostedFields.create({
       client: clientInstance,
@@ -157,7 +163,8 @@
 
   function onHostedFieldsReady (err, hostedFieldsInstance) {
     if (err) {
-      return handleError(err)
+      console.error('Error creating hosted fields', err)
+      return handleFail()
     }
 
     hostedFieldsInstance.on('validityChange', function (event) {
@@ -333,6 +340,7 @@
 
   function clientTokenLoadFailure (xhr, status) {
     console.log('fail loading client token')
+    handleFail()
   }
 
   function updateReason (reason, amount) {
@@ -355,6 +363,7 @@
       var id = event.target.id
       var amount = $(event.target).data('amount')
       var panel = $(event.target).data('panel')
+      console.log("here")
       switch (id) {
         case 'btnTeam':
           updateReason('team', amount)
@@ -445,7 +454,7 @@
   }
 
   function showPanel (panel) {
-    $('#panel0, #panel1, #panel2, #panel3, #panel4, #panelError').removeClass('hidden').hide()
+    $('#panel0, #panel1, #panel2, #panel3, #panel4, #panelError, #panelFail').removeClass('hidden').hide()
     $(panel).show()
   }
 

@@ -7,7 +7,7 @@ module.exports = function (grunt) {
         separator: '\n\n'
       },
       dist: {
-        src: ['js/bootstrap.js', 'js/owl.carousel.js', 'js/jquery.magnific-popup.js', 'js/gmap3.js', 'js/custom.js', 'js/purchase.js'],
+        src: ['js/bootstrap.js', 'js/owl.carousel.js', 'js/jquery.magnific-popup.js', 'js/gmap3.js', 'js/custom.js'],
         dest: 'js/all.js'
       }
     },
@@ -16,6 +16,11 @@ module.exports = function (grunt) {
       main: {
         files: {
           'js/all.min.js': ['js/all.js']
+        }
+      },
+      purchase: {
+        files: {
+          'js/purchase.min.js': ['js/purchase.js']
         }
       }
     },
