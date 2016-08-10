@@ -205,7 +205,7 @@ layout: default
                     <svg class="icon icon-group"><use xlink:href="#icon-group"></use></svg>
                     <h4>Team Fee</h4>
                     <p>
-                        <strong>${{ site.data.season.fee }}</strong><br/>
+                        <strong>${{ site.data.season.fees.team }}</strong><br/>
                         Each team of 7 players plays {{ site.data.season.numberGames }} games<br/>
                         <a class="popup-with-form" href="#payment">Make Payment</a>
                     </p>
@@ -300,14 +300,14 @@ layout: default
 
       <div class="radio">
         <label>
-          <input type="radio" name="purposeRadios" value="full" data-amount="{{ site.data.season.fee }}" checked>
-          Pay full ${{ site.data.season.fee }} team fee
+          <input type="radio" name="purposeRadios" value="full" data-amount="{{ site.data.season.fees.team }}" checked>
+          Pay full ${{ site.data.season.fees.team }} team fee
         </label>
       </div>
       <div class="radio">
         <label>
           <input type="radio" name="purposeRadios" value="deposit" data-amount="{{ site.data.season.deposit }}">
-          Pay ${{ site.data.season.deposit }} team deposit
+          Pay ${{ site.data.season.fees.deposit }} team deposit
         </label>
       </div>
       <div class="radio">
@@ -334,7 +334,7 @@ layout: default
         <input type="text" id="frmReason" required placeholder="Reason for payment">
 
         <label id="lblFee" for="frmFee">Amount to Pay</label>
-        <input type="text" id="frmFee" required placeholder="Amount to Pay" type="number" min="1" value="{{ site.data.season.fee }}" />
+        <input type="text" id="frmFee" required placeholder="Amount to Pay" type="number" min="1" value="{{ site.data.season.fees.team }}" />
 
         <label for="frmEmail">Email Address</label>
         <input type="email" id="frmEmail" required maxlength="40" placeholder="Email" type="email" autocomplete="email"/>
@@ -351,7 +351,7 @@ layout: default
 
       <!-- <div class="card-wrapper"></div> -->
 
-      <!-- <div id="form-inputs">
+      <div id="form-inputs">
         <label for="frmCCName">Name on card</label>
         <input type="text" id="frmCCName" required placeholder="Cardholder Name" autocomplete="cc-name" data-braintree-name="cardholder_name"/>
 
@@ -368,21 +368,21 @@ layout: default
         <div id="frmCCZip" class="hosted-field"></div>
 
         <button id="btnPay" class="btn btn-default" type="submit">Send Payment</button>
-      </div> -->
+      </div>
       <!-- <input type="tel" id="frmCCNum" required placeholder="Card Number" autocomplete="cc-number" data-braintree-name="number"/> -->
       <!-- <input type="tel" id="frmCCExp" required placeholder="MM / YY" autocomplete="cc-exp" data-braintree-name="expiration_date"/> -->
       <!-- <input type="tel" id="frmCCCVC" required placeholder="CVC" autocomplete="cc-csc" data-braintree-name="cvv"/> -->
       <!-- <input type="tel" id="frmCCZip" required pattern="[0-9]*" maxlength="5" placeholder="Postal code" autocomplete="postal-code" data-braintree-name="postal_code"/> -->
 
       <!-- Bootstrap inspired Braintree Hosted Fields example -->
-      <div class="panel panel-default bootstrap-basic">
+      <!-- <div class="panel panel-default bootstrap-basic">
         <div class="panel-heading">
           <h3 class="panel-title">Enter Card Details</h3>
         </div>
+
         <div class="row">
           <div class="form-group col-xs-8">
             <label class="control-label">Card Number</label>
-            <!--  Hosted Fields div container -->
             <div class="form-control" id="card-number"></div>
             <span class="helper-text"></span>
           </div>
@@ -390,11 +390,9 @@ layout: default
             <div class="row">
               <label class="control-label col-xs-12">Expiration Date</label>
               <div class="col-xs-6">
-                <!--  Hosted Fields div container -->
                 <div class="form-control" id="expiration-month"></div>
               </div>
               <div class="col-xs-6">
-                <!--  Hosted Fields div container -->
                 <div class="form-control" id="expiration-year"></div>
               </div>
             </div>
@@ -403,18 +401,16 @@ layout: default
         <div class="row">
           <div class="form-group col-xs-6">
             <label class="control-label">Security Code</label>
-            <!--  Hosted Fields div container -->
             <div class="form-control" id="cvv"></div>
           </div>
           <div class="form-group col-xs-6">
             <label class="control-label">Zipcode</label>
-            <!--  Hosted Fields div container -->
             <div class="form-control" id="postal-code"></div>
           </div>
         </div>
         <button value="submit" id="submit" class="btn btn-success btn-lg center-block">Pay with <span id="card-type">Card</span></button>
-      </div>
-    
+      </div> -->
+
     </div>
 
   </form>

@@ -1,290 +1,302 @@
-;(function ($, braintree, Card) {
+;(function ($, braintree, Formatter) {
   'use strict'
-
-  // var cardSettings = {
-  //   form: '#payment-form',
-  //   container: '.card-wrapper',
-  //   formSelectors: {
-  //     numberInput: 'input#frmCCNum',
-  //     expiryInput: 'input#frmCCExp',
-  //     cvcInput: 'input#frmCCCVC',
-  //     nameInput: 'input#frmCCName'
-  //   }
-  // }
-  var checkout
 
   loadClientToken(setupBraintreeClientV3, clientTokenLoadFailure)
 
-  function setupBraintreeClient (clientToken) {
-    console.log('braintree token', clientToken)
-    // var colorTransition = 'color 160ms linear'
-    // Setup Braintree client using token, attaches listener to form submit
-    braintree.setup(clientToken.token, 'custom', {
-      id: 'payment-form',
-      enableCORS: true,
-      hostedFields: {
-        styles: {
-          'input': {
-            'font-size': '16px',
-            'font-family': 'courier, monospace',
-            'font-weight': 'lighter',
-            'color': '#ccc'
-          },
-          ':focus': {
-            'color': 'black'
-          },
-          '.valid': {
-            'color': '#8bdda8'
-          }
+  // function setupBraintreeClient (clientToken) {
+  //   console.log('braintree token', clientToken)
+  //   // var colorTransition = 'color 160ms linear'
+  //   // Setup Braintree client using token, attaches listener to form submit
+  //   braintree.setup(clientToken.token, 'custom', {
+  //     id: 'payment-form',
+  //     enableCORS: true,
+  //     hostedFields: {
+  //       styles: {
+  //         'input': {
+  //           'font-size': '16px',
+  //           'font-family': 'courier, monospace',
+  //           'font-weight': 'lighter',
+  //           'color': '#ccc'
+  //         },
+  //         ':focus': {
+  //           'color': 'black'
+  //         },
+  //         '.valid': {
+  //           'color': '#8bdda8'
+  //         }
+  //       },
+  //       // styles: {
+  //       //   // Style all elements
+  //       //   'input': {
+  //       //     'width': '100%',
+  //       //     'font-size': '16px',
+  //       //     'color': '#3A3A3A',
+  //       //     'transition': colorTransition,
+  //       //     '-webkit-transition': colorTransition
+  //       //   },
+  //       //   // Styling a specific field
+  //       //   '.number': {
+  //       //     'font-family': 'monospace'
+  //       //   },
+  //       //   // Styling element state
+  //       //   ':focus': {
+  //       //     'color': 'blue'
+  //       //   },
+  //       //   '.valid': {
+  //       //     'color': 'green'
+  //       //   },
+  //       //   '.invalid': {
+  //       //     'color': 'red'
+  //       //   },
+  //       //   // Media queries
+  //       //   // Note that these apply to the iframe, not the root window.
+  //       //   '@media screen and (max-width: 700px)': {
+  //       //     'input': {
+  //       //       'font-size': '14px'
+  //       //     }
+  //       //   }
+  //       // },
+  //       // onFieldEvent: function (event) {
+  //       //   if (event.type === 'focus') {
+  //       //     // Handle focus
+  //       //     console.log('focused')
+  //       //   } else if (event.type === 'blur') {
+  //       //     // Handle blur
+  //       //     console.log('blured')
+  //       //   } else if (event.type === 'fieldStateChange') {
+  //       //     // Handle a change in validation or card type
+  //       //     console.log(event.isValid) // true|false
+  //       //     if (event.card) {
+  //       //       console.log(event.card.type, event.card)
+  //       //       // visa|master-card|american-express|diners-club|discover|jcb|unionpay|maestro
+  //       //     }
+  //       //   }
+  //       // },
+  //       number: {
+  //         selector: '#frmCCNum',
+  //         placeholder: '4111 1111 1111 1111'
+  //       },
+  //       expirationDate: {
+  //         selector: '#frmCCExp',
+  //         placeholder: 'MM/YY'
+  //       },
+  //       cvv: {
+  //         selector: '#frmCCCVC',
+  //         placeholder: '111'
+  //       },
+  //       postalCode: {
+  //         selector: '#frmCCZip',
+  //         placeholder: '11111'
+  //       }
+  //     },
+  //     onPaymentMethodReceived: braintreePaymentMethodReceived,
+  //     onReady: braintreeClientReady,
+  //     onError: braintreeClientFailure
+  //   })
+  // }
+
+  function handleError (err) {
+    console.error(err)
+    $('#errorMessage').html(err.message)
+    showPanel('#panelError')
+  };
+
+  function setupBraintreeClientV3 (clientToken) {
+    console.log('setting up client', clientToken)
+    if (!clientToken.token) {
+      return handleError(new Error('Error connecting to payment provider'))
+    }
+    braintree.client.create({
+      authorization: clientToken.token
+      // enableCORS: true
+    }, setupHostedFieldsV3)
+  }
+
+  function setupHostedFieldsV3 (err, clientInstance) {
+    if (err) {
+      return handleError(err)
+    }
+    braintree.hostedFields.create({
+      client: clientInstance,
+      styles: {
+        'input': {
+          'font-size': '14px',
+          'font-family': 'courier, monospace',
+          'color': '#3a3a3a'
         },
-        // styles: {
-        //   // Style all elements
-        //   'input': {
-        //     'width': '100%',
-        //     'font-size': '16px',
-        //     'color': '#3A3A3A',
-        //     'transition': colorTransition,
-        //     '-webkit-transition': colorTransition
-        //   },
-        //   // Styling a specific field
-        //   '.number': {
-        //     'font-family': 'monospace'
-        //   },
-        //   // Styling element state
-        //   ':focus': {
-        //     'color': 'blue'
-        //   },
-        //   '.valid': {
-        //     'color': 'green'
-        //   },
-        //   '.invalid': {
-        //     'color': 'red'
-        //   },
-        //   // Media queries
-        //   // Note that these apply to the iframe, not the root window.
-        //   '@media screen and (max-width: 700px)': {
-        //     'input': {
-        //       'font-size': '14px'
-        //     }
-        //   }
-        // },
-        // onFieldEvent: function (event) {
-        //   if (event.type === 'focus') {
-        //     // Handle focus
-        //     console.log('focused')
-        //   } else if (event.type === 'blur') {
-        //     // Handle blur
-        //     console.log('blured')
-        //   } else if (event.type === 'fieldStateChange') {
-        //     // Handle a change in validation or card type
-        //     console.log(event.isValid) // true|false
-        //     if (event.card) {
-        //       console.log(event.card.type, event.card)
-        //       // visa|master-card|american-express|diners-club|discover|jcb|unionpay|maestro
-        //     }
-        //   }
-        // },
+        ':focus': {
+          'color': 'black'
+        },
+        '.valid': {
+          'color': '#8bdda8'
+        },
+        '.invalid': {
+          'color': 'tomato'
+        }
+      },
+      fields: {
         number: {
           selector: '#frmCCNum',
           placeholder: '4111 1111 1111 1111'
+        },
+        cvv: {
+          selector: '#frmCCCVC',
+          placeholder: '123'
         },
         expirationDate: {
           selector: '#frmCCExp',
           placeholder: 'MM/YY'
         },
-        cvv: {
-          selector: '#frmCCCVC',
-          placeholder: '111'
-        },
         postalCode: {
           selector: '#frmCCZip',
-          placeholder: '11111'
+          placeholder: '90210'
         }
-      },
-      onPaymentMethodReceived: braintreePaymentMethodReceived,
-      onReady: braintreeClientReady,
-      onError: braintreeClientFailure
-    })
-  }
-
-  function setupBraintreeClientV3 (clientToken) {
-    console.log('setting up client')
-    braintree.client.create({
-      authorization: clientToken.token
-    }, function (err, clientInstance) {
-      if (err) {
-        console.error(err)
-        return
       }
-      console.log('got token')
-      braintree.hostedFields.create({
-        client: clientInstance,
-        styles: {
-          'input': {
-            'font-size': '14px',
-            'font-family': 'helvetica, tahoma, calibri, sans-serif',
-            'color': '#3a3a3a'
-          },
-          ':focus': {
-            'color': 'black'
-          }
-        },
-        fields: {
-          number: {
-            selector: '#card-number',
-            placeholder: '4111 1111 1111 1111'
-          },
-          cvv: {
-            selector: '#cvv',
-            placeholder: '123'
-          },
-          expirationMonth: {
-            selector: '#expiration-month',
-            placeholder: 'MM'
-          },
-          expirationYear: {
-            selector: '#expiration-year',
-            placeholder: 'YY'
-          },
-          postalCode: {
-            selector: '#postal-code',
-            placeholder: '90210'
-          }
-        }
-      }, function (err, hostedFieldsInstance) {
-        if (err) {
-          console.error(err)
-          return
-        }
-
-        $(document).ready(function () {
-          setupPaymentPopup('.popup-with-form', '#frmPayor', function () {
-            // Show the first panel in payment form
-            // $('#panel1').show()
-            // $('#panel2').hide()
-
-            $('#panel2').show()
-            $('#panel1').hide()
-          })
-          setupRegistrationPopup('.popup-with-iframe')
-          // var card = new Card(cardSettings)
-          // console.log(card)
-
-          $('#btnNext').click(onNextButton)
-
-          $('input[type=radio][name=purposeRadios]').on('change', function () {
-            displayFormFields(this)
-          })
-          displayFormFields($('input[type=radio][name=purposeRadios]:checked'))
-
-          $('#frmFee').on('blur', function () {
-            $('#btnPay').html('Send $' + $('#frmFee').val().trim() + ' Payment')
-          })
-        })
-
-        hostedFieldsInstance.on('validityChange', function (event) {
-          var field = event.fields[event.emittedBy]
-
-          if (field.isValid) {
-            // Apply styling for a valid field
-            $(field.container).parents('.form-group').addClass('has-success')
-            if (event.emittedBy === 'number') {
-              $('#card-number').next('span').text('')
-            }
-          } else if (field.isPotentiallyValid) {
-            // Remove styling  from potentially valid fields
-            $(field.container).parents('.form-group').removeClass('has-warning')
-            $(field.container).parents('.form-group').removeClass('has-success')
-            if (event.emittedBy === 'number') {
-              $('#card-number').next('span').text('')
-            }
-          } else {
-            // Add styling to invalid fields
-            $(field.container).parents('.form-group').addClass('has-warning')
-            // Add helper text for an invalid card number
-            if (event.emittedBy === 'number') {
-              $('#card-number').next('span').text('Looks like this card number has an error.')
-            }
-          }
-        })
-
-        hostedFieldsInstance.on('cardTypeChange', function (event) {
-          // Handle a field's change, such as a change in validity or credit card type
-          if (event.cards.length === 1) {
-            $('#card-type').text(event.cards[0].niceType)
-          } else {
-            $('#card-type').text('Card')
-          }
-        })
-
-        $('.panel-body').submit(function (event) {
-          event.preventDefault()
-          hostedFieldsInstance.tokenize(function (err, payload) {
-            if (err) {
-              console.error(err)
-              return
-            }
-
-            // This is where you would submit payload.nonce to your server
-            console.log('Submit your nonce to your server here!')
-          })
-        })
-      })
-    })
+    }, onHostedFieldsReady)
   }
 
-  function braintreePaymentMethodReceived (obj) {
-    console.log('payment method received', obj)
+  function onHostedFieldsReady (err, hostedFieldsInstance) {
+    if (err) {
+      return handleError(err)
+    }
 
-    // Get data from form
-    var data = $.extend(getFormData(), { nonce: obj.nonce })
-    // Send payment nonce with additional form data
-    sendPaymentForm(data, function (result) {
-      console.log('sent payment form', result)
-      if (result.status !== 200) {
-        console.log('not 200')
+    hostedFieldsInstance.on('validityChange', function (event) {
+      var field = event.fields[event.emittedBy]
+
+      if (field.isValid) {
+        // Apply styling for a valid field
+        $(field.container).addClass('braintree-hosted-fields-valid')
+        // if (event.emittedBy === 'number') {
+        //   $('#card-number').next('span').text('')
+        // }
+      } else if (field.isPotentiallyValid) {
+        // Remove styling from potentially valid fields
+        $(field.container).removeClass('braintree-hosted-fields-valid')
+        $(field.container).removeClass('braintree-hosted-fields-invalid')
+        // if (event.emittedBy === 'number') {
+        //   $('#card-number').next('span').text('')
+        // }
+      } else {
+        // Add styling to invalid fields
+        $(field.container).addClass('braintree-hosted-fields-invalid')
+        // Add helper text for an invalid card number
+        // if (event.emittedBy === 'number') {
+        //   $('#frmCCNum').next('span').text('Looks like this card number has an error.')
+        // }
       }
-      checkout.teardown(function () {
-        checkout = null
-        // createHostedFields()
-      })
     })
+
+    hostedFieldsInstance.on('cardTypeChange', function (event) {
+      // Handle a field's change, such as a change in validity or credit card type
+      // if (event.cards.length === 1) {
+      //   $('#card-type').text(event.cards[0].niceType)
+      // } else {
+      //   $('#card-type').text('Card')
+      // }
+    })
+
+    onBraintreeReady(hostedFieldsInstance)
   }
 
-  function braintreeClientReady (integration) {
-    console.log('braintree ready', integration)
-    checkout = integration
-
+  function onBraintreeReady (hostedFieldsInstance) {
     $(document).ready(function () {
-      setupPaymentPopup('.popup-with-form', '#frmPayor', function () {
-        // Show the first panel in payment form
-        // $('#panel1').show()
-        // $('#panel2').hide()
-
-        $('#panel2').show()
-        $('#panel1').hide()
+      $('input').on('focus', function (e) {
+        var div = $(e.target).parent()
+        div.removeClass('braintree-hosted-fields-valid')
+        div.removeClass('braintree-hosted-fields-invalid')
+        div.addClass('braintree-hosted-fields-focused')
+      }).on('blur', function (e) {
+        var div = $(e.target).parent()
+        div.removeClass('braintree-hosted-fields-focused')
+        div.removeClass('braintree-hosted-fields-valid')
+        div.removeClass('braintree-hosted-fields-invalid')
+        if (e.target.checkValidity()) {
+          div.addClass('braintree-hosted-fields-valid')
+        } else {
+          div.addClass('braintree-hosted-fields-invalid')
+        }
       })
-      setupRegistrationPopup('.popup-with-iframe')
-      // var card = new Card(cardSettings)
-      // console.log(card)
 
-      $('#btnNext').click(onNextButton)
-
-      $('input[type=radio][name=purposeRadios]').on('change', function () {
-        displayFormFields(this)
+      var formatterPhone = new Formatter(document.getElementById('frmPhone'), {
+        'pattern': '({{999}}) {{999}}-{{9999}}'
       })
-      displayFormFields($('input[type=radio][name=purposeRadios]:checked'))
+
+      $('button').click(setupClickHander(hostedFieldsInstance))
 
       $('#frmFee').on('blur', function () {
         $('#btnPay').html('Send $' + $('#frmFee').val().trim() + ' Payment')
+        $('#feeDisplay').html('$' + $('#frmFee').val().trim())
       })
+
+      showPanel('#panel1')
+
+      // $('.panel-body').submit(function (event) {
+      //   event.preventDefault()
+      //   hostedFieldsInstance.tokenize(function (err, payload) {
+      //     if (err) {
+      //       console.error(err)
+      //       return
+      //     }
+      //
+      //     // This is where you would submit payload.nonce to your server
+      //     console.log('Submit your nonce to your server here!')
+      //   })
+      // })
     })
   }
 
-  function braintreeClientFailure (err) {
-    console.log('braintree client setup error', err)
-    console.dir(err)
-  }
+  // function braintreePaymentMethodReceived (obj) {
+  //   console.log('payment method received', obj)
+  //
+  //   // Get data from form
+  //   var data = $.extend(getFormData(), { nonce: obj.nonce })
+  //   // Send payment nonce with additional form data
+  //   sendPaymentForm(data, function (result) {
+  //     console.log('sent payment form', result)
+  //     if (result.status !== 200) {
+  //       console.log('not 200')
+  //     }
+  //     checkout.teardown(function () {
+  //       checkout = null
+  //       // createHostedFields()
+  //     })
+  //   })
+  // }
+
+  // function braintreeClientReady (integration) {
+  //   console.log('braintree ready', integration)
+  //   checkout = integration
+  //
+  //   $(document).ready(function () {
+  //     setupPaymentPopup('.popup-with-form', '#frmPayor', function () {
+  //       // Show the first panel in payment form
+  //       // $('#panel1').show()
+  //       // $('#panel2').hide()
+  //
+  //       $('#panel2').show()
+  //       $('#panel1').hide()
+  //     })
+  //     setupRegistrationPopup('.popup-with-iframe')
+  //     // var card = new Card(cardSettings)
+  //     // console.log(card)
+  //
+  //     $('button').click(onButtonClicked)
+  //
+  //     // $('input[type=radio][name=purposeRadios]').on('change', function () {
+  //     //   displayFormFields(this)
+  //     // })
+  //     // displayFormFields($('input[type=radio][name=purposeRadios]:checked'))
+  //
+  //     $('#frmFee').on('blur', function () {
+  //       $('#btnPay').html('Send $' + $('#frmFee').val().trim() + ' Payment')
+  //     })
+  //   })
+  // }
+
+  // function braintreeClientFailure (err) {
+  //   console.log('braintree client setup error', err)
+  //   console.dir(err)
+  // }
 
   function sendPaymentForm (data, onDone, onFail) {
     $.ajax({
@@ -293,13 +305,15 @@
       contentType: 'application/json; charset=UTF-8',
       data: {
         nonce: data.nonce,
+        merchant: data.merchant,
         purpose: data.purpose,
         payor: data.payor,
         team: data.team,
         reason: data.reason,
         amount: data.amount,
         email: data.email,
-        phone: data.phone
+        phone: data.phone,
+        name: data.name
       },
       crossDomain: true
     })
@@ -321,95 +335,153 @@
     console.log('fail loading client token')
   }
 
-  function setupRegistrationPopup (selector) {
-    $(selector).magnificPopup({
-      type: 'iframe',
-      iframe: {
-        markup: '<div class="mfp-iframe-scaler your-special-css-class">' +
-          '<div class="mfp-close"></div>' +
-          '<iframe class="mfp-iframe" frameborder="0" allowfullscreen>Loading...</iframe>' +
-          '</div>'
-      }
-    })
+  function updateReason (reason, amount) {
+    $('#frmPurpose').val(reason)
+    $('#frmFee').val(amount)
+    $('#btnPay').html('Send $' + amount + ' Payment')
+    $('#feeDisplay').html('$' + amount)
   }
 
-  function setupPaymentPopup (selector, focusSelector, callback) {
-    $(selector).magnificPopup({
-      type: 'inline',
-      preloader: false,
-      focus: focusSelector,
-      callbacks: {
-        beforeOpen: function () {
-          // When elemened is focused, some mobile browsers in some cases zoom in
-          // It looks not nice, so we disable it:
-          if ($(window).width() < 700) {
-            // cardSettings.width = 250
-            this.st.focus = false
+  function displayFields (props) {
+    $('#lblTeam, #lblFee, #lblReason').hide()
+    $('#wrapTeam, #wrapFee, #wrapReason').hide()
+    $('#frmTeam, #frmFee, #frmReason, #frmCCName').removeAttr('required')
+    $(props.show).show()
+    $(props.required).attr('required', 'required')
+  }
+
+  function setupClickHander (hostedFieldsInstance) {
+    return function onButtonClicked (event) {
+      var id = event.target.id
+      var amount = $(event.target).data('amount')
+      var panel = $(event.target).data('panel')
+      switch (id) {
+        case 'btnTeam':
+          updateReason('team', amount)
+          displayFields({
+            show: '#lblTeam, #wrapTeam',
+            required: '#frmTeam'
+          })
+          break
+        case 'btnDeposit':
+          updateReason('deposit', amount)
+          displayFields({
+            show: '#lblTeam, #wrapTeam',
+            required: '#frmTeam'
+          })
+          break
+        case 'btnPlayer':
+          updateReason('player', amount)
+          displayFields({
+            show: '#lblReason, #wrapReason',
+            required: '#frmReason'
+          })
+          break
+        case 'btnPartial':
+          updateReason('partial', amount)
+          displayFields({
+            show: '#lblTeam, #wrapTeam, #lblFee, #wrapFee',
+            required: '#frmTeam, #frmFee'
+          })
+          break
+        case 'btnOther':
+          updateReason('other', amount)
+          displayFields({
+            show: '#lblReason, #wrapReason, #lblFee, #wrapFee',
+            required: '#frmReason, #frmFee'
+          })
+          break
+        case 'btnNext':
+          if (onClickNext()) {
+            $('#frmCCName').attr('required', 'required')
           } else {
-            this.st.focus = focusSelector
+            panel = null
           }
-          callback && callback()
-        }
+          break
+        case 'btnPay':
+          event.preventDefault()
+          // Deactivate submit button
+          $(event.target).prop('disabled', true)
+
+          hostedFieldsInstance.tokenize(function (err, obj) {
+            if (err) {
+              return handleError(err)
+            }
+
+            console.log('payment method received', obj)
+
+            // Get data from form
+            var data = $.extend(getFormData(), { nonce: obj.nonce })
+            console.log('sending data', data)
+            // Send payment nonce with additional form data
+            sendPaymentForm(data, function (result) {
+              console.log('sent payment form', result)
+              if (result.status !== 200) {
+                console.log('not 200')
+              }
+              showPanel('#panel4')
+            }, function (err) {
+              // Activate submit button
+              $(event.target).prop('disabled', false)
+              return handleError(err)
+            })
+          })
+          break
+        case 'btnBack1':
+        case 'btnBack2':
+        case 'btnRetry':
+          break
+        case 'btnCancel':
+        case 'btnDone':
+          window.location.replace('/')
+          break
+        default:
+          // Shouldn't happen, error out
       }
-    })
+      if (panel) {
+        showPanel(panel)
+      }
+    }
   }
 
-  function onNextButton () {
-    var $form = $('#payment-form')
-    var $inputs = $('#frmTeam, #frmFee, #frmReason')
+  function showPanel (panel) {
+    $('#panel0, #panel1, #panel2, #panel3, #panel4, #panelError').removeClass('hidden').hide()
+    $(panel).show()
+  }
+
+  function onClickNext () {
+    // var $form = $('#payment-form')
+    var $inputs = $('#frmPayor, #frmTeam, #frmFee, #frmReason, #frmEmail, #frmPhone')
     if (checkValidity($inputs)) {
-      $('#panel1').hide()
-      $('#panel2').show()
       $('#frmCCName, #frmCCNum, #frmCCExp, #frmCCCVC, #frmCCZip').attr('required', 'required')
+      return true
     } else {
       // If the form is invalid, submit it. The form won't actually submit
       // this will just cause the browser to display the native HTML5 error messages.
-      $form.find(':submit').click()
+      // $form.find(':submit').click()
+      return false
     }
   }
 
   function checkValidity (inputs) {
+    var result = true
     for (var i = 0, len = inputs.length; i < len; i++) {
+      var div = $(inputs[i]).parent()
       if (!inputs[i].checkValidity()) {
-        return false
+        div.addClass('braintree-hosted-fields-invalid')
+        result = false
+      } else {
+        div.addClass('braintree-hosted-fields-valid')
       }
     }
-    return true
-  }
-
-  function displayFormFields (radios) {
-    $('#lblTeam, #lblFee, #lblReason').hide()
-    $('#frmTeam, #frmFee, #frmReason').hide()
-    $('#frmTeam, #frmFee, #frmReason').removeAttr('required')
-    $('#frmCCName, #frmCCNum, #frmCCExp, #frmCCCVC, #frmCCZip').removeAttr('required')
-    if (!radios) return
-    var el = $(radios)
-    $('#frmFee').val(el.data('amount'))
-    $('#btnPay').html('Send $' + el.data('amount') + ' Payment')
-    console.log(el.data('amount'), el.data())
-    switch (el.val()) {
-      case 'full':
-        $('#lblTeam, #frmTeam').show()
-        $('#frmTeam').attr('required', 'required')
-        break
-      case 'deposit':
-        $('#lblTeam, #frmTeam').show()
-        $('#frmTeam').attr('required', 'required')
-        break
-      case 'partial':
-        $('#lblTeam, #frmTeam, #lblFee, #frmFee').show()
-        $('#frmTeam, #frmFee').attr('required', 'required')
-        break
-      case 'other':
-        $('#lblReason, #frmReason, #lblFee, #frmFee').show()
-        $('#frmReason, #frmFee').attr('required', 'required')
-        break
-    }
+    return result
   }
 
   function getFormData () {
     return {
-      purpose: $('input[type=radio][name=purposeRadios]:checked').val(),
+      merchant: $('#frmMerchant').val().trim(),
+      // purpose: $('input[type=radio][name=purposeRadios]:checked').val(),
+      purpose: $('#frmPurpose').val().trim(),
       payor: $('#frmPayor').val().trim(),
       team: $('#frmTeam').val().trim(),
       reason: $('#frmReason').val().trim(),
@@ -424,4 +496,4 @@
       zip: $('#frmCCZip').val().trim()
     }
   }
-})(jQuery, braintree, Card)
+})(jQuery, braintree, Formatter)

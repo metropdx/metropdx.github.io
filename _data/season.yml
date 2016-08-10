@@ -4,8 +4,10 @@ start: January 29, 2017
 end: March 12, 2017
 days: Sundays
 times: 9am - 4pm
-fee: 475
-deposit: 100
+fees:
+  team: 475
+  deposit: 100
+  player: 50
 numberGames: 7
 location:
   name: La Salle Catholic College Preparatory
