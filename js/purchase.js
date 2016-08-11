@@ -307,7 +307,7 @@
 
   function sendPaymentForm (data, onDone, onFail) {
     $.ajax({
-      url: 'https://tl4hta2txd.execute-api.us-west-2.amazonaws.com/dev/checkout',
+      url: window.CONFIG.checkoutUrl,
       type: 'POST',
       contentType: 'application/json; charset=UTF-8',
       data: {
@@ -330,7 +330,7 @@
 
   function loadClientToken (onDone, onFail) {
     $.ajax({
-      url: 'https://tl4hta2txd.execute-api.us-west-2.amazonaws.com/dev/token',
+      url: window.CONFIG.tokenUrl,
       type: 'GET',
       crossDomain: true
     })
@@ -363,7 +363,6 @@
       var id = event.target.id
       var amount = $(event.target).data('amount')
       var panel = $(event.target).data('panel')
-      console.log("here")
       switch (id) {
         case 'btnTeam':
           updateReason('team', amount)
