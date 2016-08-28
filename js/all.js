@@ -8539,6 +8539,16 @@ $.fn.gmap3 = function () {
         type:'image'
     });
 
+    $('.popup-with-iframe').magnificPopup({
+      type: 'iframe',
+      iframe: {
+        markup: '<div class="mfp-iframe-scaler your-special-css-class">' +
+          '<div class="mfp-close"></div>' +
+          '<iframe class="mfp-iframe" frameborder="0" allowfullscreen>Loading...</iframe>' +
+          '</div>'
+      }
+    });
+
     /* Google map
     ----------------------------------------------*/
     $(".map").each(function(){

@@ -103,7 +103,9 @@ layout: default
                 </div>
             </div>
             <div class="col-sm-6">
+              <div class="tilt pic">
                 <img src="img/about.jpg" alt="...">
+              </div>
             </div>
         </div>
     </div>
@@ -168,7 +170,7 @@ layout: default
 </div>
 <!-- End Testimonials -->
 
-<!-- Start Treatments -->
+<!-- Start Registration -->
 <div id="season" class="treatments">
     <div class="container-fluid">
         <h2 class="section-title">{{ site.data.season.name }}</h2>
@@ -176,11 +178,12 @@ layout: default
         <div class="row">
             <div class="col-sm-6 col-md-4">
                 <div class="icon-box">
-                    <svg class="icon icon-clock-o"><use xlink:href="#icon-clock-o"></use></svg>
+                    <svg class="icon icon-calendar"><use xlink:href="#icon-calendar"></use></svg>
                     <h4>Registration Deadline</h4>
                     <p>
                         {{ site.data.season.deadline }}<br/>
                         Early registration guarantees your spot!
+                        <a class="popup-with-iframe" href="https://docs.google.com/forms/d/1cutOphONmQi4W3iWMbv9VA1QTlpI-UhXeiCxK6b1d_U/viewform?embedded=true">Register Team</a>
                     </p>
                 </div>
             </div>
@@ -189,14 +192,15 @@ layout: default
                     <svg class="icon icon-group"><use xlink:href="#icon-group"></use></svg>
                     <h4>Team Fee</h4>
                     <p>
-                        <strong>${{ site.data.season.fee }}</strong><br/>
-                        Each team of 7 players plays {{ site.data.season.numberGames }} games
+                        <strong>${{ site.data.season.fees.team }}</strong><br/>
+                        Each team of 7 players plays {{ site.data.season.numberGames }} games<br/>
+                        <a href="/payment">Make Payment</a>
                     </p>
                 </div>
             </div>
             <div class="col-sm-6 col-md-4">
                 <div class="icon-box">
-                    <svg class="icon icon-calendar"><use xlink:href="#icon-calendar"></use></svg>
+                    <svg class="icon icon-clock-o"><use xlink:href="#icon-clock-o"></use></svg>
                     <h4>Game Times</h4>
                     <p>
                         {{ site.data.season.days }} {{ site.data.season.times }}<br/>
@@ -233,52 +237,26 @@ layout: default
                     </p>
                 </div>
             </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="icon-box icon-box-featured">
+                <a class="popup-with-iframe" href="https://docs.google.com/forms/d/1cutOphONmQi4W3iWMbv9VA1QTlpI-UhXeiCxK6b1d_U/viewform?embedded=true">
+                  <h3><svg class="icon icon-dark icon-pencil"><use xlink:href="#icon-pencil"></use></svg> Register Your Team</h3>
+                  <p>Complete the online team registration form</p>
+                </a>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="icon-box icon-box-featured">
+                <a href="/payment">
+                  <h3><svg class="icon icon-dark icon-credit-card"><use xlink:href="#icon-credit-card"></use></svg> Make Team Payment</h3>
+                  <p>Pay for your team</p>
+                </a>
+              </div>
+            </div>
         </div>
-    </div>
-    <div class="container-fluid">
-        <iframe src="https://docs.google.com/forms/d/1cutOphONmQi4W3iWMbv9VA1QTlpI-UhXeiCxK6b1d_U/viewform?embedded=true" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
     </div>
 </div>
-<!-- End Treatments -->
-
-<!-- Start Our team -->
-<!-- <div id="team" class="team">
-    <h2 class="section-title">Our Team</h2>
-    <div id="team-carousel">
-    {% for member in site.data.team %}
-        <div class="expandable-box">
-            <div class="expandable-box-top">
-                <img src="{{ site.baseurl }}/img/{{ member.image }}" alt="{{ member.name }}">
-                <h4>{{ member.name }}</h4>
-            </div>
-            <div class="expandable-box-bottom">
-                <span data-toggle="tooltip" data-placement="bottom" title="{{ member.email }}"><svg class="icon icon-envelope"><use xlink:href="#icon-envelope"></use></svg></span>
-                <span data-toggle="tooltip" data-placement="bottom" title="{{ member.phone }}"><svg class="icon icon-phone"><use xlink:href="#icon-phone"></use></svg></span>
-            </div>
-        </div>
-    {% endfor %}
-    </div>
-</div> -->
-<!-- End Our team -->
-
-<!-- Start Gallery -->
-<!-- <div id="gallery" class="gallery">
-
-    <h2 class="section-title">Gallery</h2>
-
-    {% for images in site.data.gallery %}
-        <a href="{{ site.baseurl }}/img/gallery/large/{{ images.image_large }}" class="gallery-item expandable-box image-link">
-            <div class="expandable-box-top">
-                <img src="{{ site.baseurl }}/img/gallery/thumb/{{ images.image_thumb }}" alt="{{ images.image_alt }}">
-            </div>
-            <div class="expandable-box-bottom">
-                <span><svg class="icon icon-chain"><use xlink:href="#icon-chain"></use></svg></span>
-            </div>
-        </a>
-    {% endfor %}
-
-</div> -->
-<!-- End Gallery -->
+<!-- End Registration -->
 
 <!-- Start Schedules -->
 <div id="schedules" class="schedules"></div>

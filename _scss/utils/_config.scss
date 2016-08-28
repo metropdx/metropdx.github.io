@@ -31,7 +31,7 @@ $deepOrange: #f1490a;
 $orange: #f7ad1a;
 
 /* Color usage */
-$colorPrimary: $orange;
+$colorPrimary: darken($orange, 8%);
 $colorHeading: $grey;
 $colorBase: $greyLight;
 $colorBg: $alabaster;
@@ -97,4 +97,3 @@ $btn-border-radius-small: 0;
 $tooltip-max-width: 260px;
 $tooltip-color: #fff;
 $tooltip-bg: darken($colorPrimary, 2%);
-
