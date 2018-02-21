@@ -1,10 +1,11 @@
 ---
 layout: page
+published: true
 ---
 
 ## Metro 7v7 Rules of Competition
 
-Each player MUST have a valid OASA player pass and present it to the referee prior to each game. No pass, no play.
+Each player MUST have a valid OASA player pass and present it to the referee prior to each game.**No pass, no play**.
 
 * 25 minute halves, running time, 5 minute half time.
 * Games will start on time. Be ready.
@@ -12,12 +13,12 @@ Each player MUST have a valid OASA player pass and present it to the referee pri
 * Sub on the fly.
 * Teams must have home and alternate jerseys. If there is an issue with the shirts, the home team must change.
 * Each player can only play for one team, per division, during the season.
-* Each team must present a Game Rosters to the referee prior to each game. This roster should be typed listing the name, jersey number, card number and expiration date for each player.
+* **Each team must present a Game Rosters to the referee prior to each game**. This roster should be typed listing the name, jersey number, card number and expiration date for each player.
 * Home team provides game ball.
 * Referee’s decisions are final.
 * Be kind to our referees.
-* If a team has a five-goal lead the opposing team may add one extra player.
-* COED: Men are limited to 2 goals.
+* **If a team has a five-goal lead the opposing team may add one extra player.**
+* **COED: Men are limited to 2 goals.**
 * COED: Women have no limits on goals scored.
 
 ### Point system to determine playoff spot
