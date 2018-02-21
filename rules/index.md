@@ -12,7 +12,7 @@ Each player MUST have a valid OASA player pass and present it to the referee pri
 * No offside.
 * Sub on the fly.
 * Teams must have home and alternate jerseys. If there is an issue with the shirts, the home team must change.
-* Each player can only play for one team, per division, during the season.
+* Each player can only play for one team, per division, during the season. Players may play up a division, Higher division players may not play down.
 * **Each team must present a Game Rosters to the referee prior to each game**. This roster should be typed listing the name, jersey number, card number and expiration date for each player.
 * Home team provides game ball.
 * Referee’s decisions are final.
