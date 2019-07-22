@@ -1,8 +1,8 @@
-name: Winter 2019 Season
-deadline: December 31, 2018
-start: February 10, 2019
-end: March 24, 2019
-days: Sundays
+name: Winter 2020 Season
+deadline: December 31, 2019
+start: February 1, 2019
+end: March 22, 2020
+days: Saturday,Sundays
 times: 9am - 4pm
 fees:
   team: 500
@@ -19,6 +19,7 @@ genders:
   - Men
   - Women
   - Coed
+  - Walking
 divisions:
   - Premier
   - Select Green
